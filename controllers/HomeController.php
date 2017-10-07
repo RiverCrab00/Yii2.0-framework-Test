@@ -1,5 +1,6 @@
 <?php
 namespace app\controllers;
+use app\models\Stu_depart;
 use app\models\Stu_info;
 use app\models\Student;
 use yii\web\Controller;
@@ -53,12 +54,28 @@ class HomeController extends Controller{
         $db=\Yii::$app->db;
         $data=$db->createCommand('select i.*,d.name as dname from stu_info as i LEFT JOIN  stu_depart as d on i.depart=d.id')->queryAll();
         //dd($data);
-        return $this->render('index.php',['data'=>$data]);
+        return $this->renderPartial('index.php',['data'=>$data]);
     }
     function actionHome(){
         $data=\Yii::$app->db->createCommand('select i.*,d.name as dname from stu_info as i LEFT JOIN  stu_depart as d on i.depart=d.id')->queryAll();
         dd($data);
         return $this->renderPartial('index',['data'=>1]);
-
+    }
+    function actionLeft()
+    {
+        $depart = Stu_depart::findOne(2);
+        //$stu=$depart->hasMany(Stu_info::className(),['depart'=>'id'])->asArray()->all();
+        //会调用__get方法,getStudent(),相等于$depart->getStudent();
+        //$stu=$depart->Student;
+        //$info=Stu_info::find()->all();
+        $info=Stu_info::find()->with('student')->asArray()->all();
+        //$stu=$info->hasOne(Stu_depart::className(),['id'=>'depart'])->asArray()->one();
+        /*foreach($info as $v){
+            $stu[]=$v->Student;
+        }*/
+        //$stu=$info->Info;
+        $sql=Stu_info::find()->createCommand()->getRawSql();
+        print_r($sql);
+        dd($info);
     }
 }

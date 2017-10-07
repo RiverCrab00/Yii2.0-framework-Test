@@ -9,5 +9,9 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 class Stu_info extends ActiveRecord{
-
+    public function getStudent()
+    {
+        $res=$this->hasOne(Stu_depart::className(),['id'=>'depart']);
+        return $res;
+    }
 }
