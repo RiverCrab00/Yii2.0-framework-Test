@@ -16,3 +16,6 @@ function dd($arr){
     echo '</pre>';
     die;
 }
+function dump($str){
+    echo $str.'<br>';
+}

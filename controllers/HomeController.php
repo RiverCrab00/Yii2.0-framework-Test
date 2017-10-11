@@ -4,6 +4,7 @@ use app\models\Stu_depart;
 use app\models\Stu_info;
 use app\models\Student;
 use yii\web\Controller;
+
 class HomeController extends Controller{
     //public $enableCsrfValidation=false;
     function actionIndex(){
