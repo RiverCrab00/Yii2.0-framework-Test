@@ -36,4 +36,18 @@ class MsgController extends Controller{
         dump(Url::to('site/index'));
         dump(Url::toRoute('site/index'));
     }
+	 public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'maxLength' => 5,
+                'minLength' => 5
+            ],
+        ];
+    }
+
 }
